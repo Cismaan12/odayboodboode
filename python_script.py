@@ -3,6 +3,8 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 # Step 1: Create Temporary Email using Temp-Mail API (or other similar services)
 def create_temp_email():
@@ -12,7 +14,8 @@ def create_temp_email():
 
 # Step 2: Function to create Facebook account using the temporary email
 def create_fb_account(temp_email, temp_password):
-    driver = webdriver.Chrome(executable_path='/path/to/chromedriver')  # Change path to your WebDriver
+    # Update the way to use WebDriver
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     driver.get("https://www.facebook.com/reg")
 
     time.sleep(3)
@@ -36,7 +39,7 @@ def create_fb_account(temp_email, temp_password):
 
 # Step 3: Mass Reporting Function
 def mass_report(profile_url, fb_email, fb_password):
-    driver = webdriver.Chrome(executable_path='/path/to/chromedriver')
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     driver.get("https://www.facebook.com/login")
 
     time.sleep(3)
@@ -53,7 +56,7 @@ def mass_report(profile_url, fb_email, fb_password):
 
     time.sleep(3)
 
-    # Report Profile (update Xpath if necessary)
+    # Report Profile
     report_button = driver.find_element(By.XPATH, '//div[contains(text(), "Report")]')
     report_button.click()
 
@@ -74,9 +77,7 @@ def mass_report(profile_url, fb_email, fb_password):
 
 # Step 4: Bypass Verification (Optional)
 def bypass_verification(fb_email, fb_password):
-    # This step would depend on the service you are working with, typically involving captcha bypasses
-    # or automating code input from email/SMS services. Example below assumes a bypass for a simple verification.
-    driver = webdriver.Chrome(executable_path='/path/to/chromedriver')
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     driver.get("https://www.facebook.com/login")
 
     # Log into Facebook
