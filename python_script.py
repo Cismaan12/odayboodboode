@@ -15,8 +15,7 @@ def create_temp_email():
 # Step 2: Function to create Facebook account using the temporary email
 def create_fb_account(temp_email, temp_password):
     # Update the way to use WebDriver
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    driver.get("https://www.facebook.com/reg")
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
     time.sleep(3)
 
